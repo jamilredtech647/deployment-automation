@@ -27,4 +27,7 @@ jobs:
         with:
           push: true
           tags: safayetjamil/deployment-automation:${{github.run_number}}
-        
+          
+      - name: Run a Bash command
+        run: |
+          docker commpose up --build
