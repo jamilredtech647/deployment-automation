@@ -36,8 +36,5 @@ jobs:
 
       - name: Run a Bash command
         run: |
-          # You can use docker-compose here
-          docker-compose --version
-          pwd
           ls
-          docker-compose -f docker-compose.yml pull dev
+          # docker-compose -f docker-compose.yml pull dev
