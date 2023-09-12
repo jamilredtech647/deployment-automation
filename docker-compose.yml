@@ -3,7 +3,7 @@ version: '3.8'
 services:
     dev:
         container_name: nestjs_api_dev
-        image: nestjs-api-dev:1.0.0
+        image: safayetjamil/deployment-automation:${{github.run_number}}
         build:
             context: .
             target: development
