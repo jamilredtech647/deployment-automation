@@ -38,4 +38,4 @@ jobs:
         run: |
           # You can use docker-compose here
           docker-compose --version
-          docker-compose up 
+          docker-compose pull dev 
