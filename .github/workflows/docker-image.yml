@@ -21,8 +21,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-    
-      - 
-        name: Build the Docker image
-        run: docker build . --file Dockerfile --tag safayetjamil/deployment-automation:${{github.run_number}} 
+      -
+        name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: safayetjamil/deployment-automation:${{github.run_number}}
         
