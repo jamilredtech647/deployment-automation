@@ -36,4 +36,5 @@ jobs:
 
       - name: Run a Bash command
         run: |
-          docker-commpose up --build
+          # You can use docker-compose here
+          docker-compose --version
