@@ -34,8 +34,5 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
 
       - name: Run a Bash command
-  
-        working-directory: ./deployment-automation
         run: |
-          ls
-          # docker-compose -f docker-compose.yml pull dev
+          docker-compose -f docker-compose.yml pull dev
