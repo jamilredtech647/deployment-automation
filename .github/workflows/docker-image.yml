@@ -39,20 +39,8 @@ jobs:
       - name: Run a Bash command
         run: |
           docker-compose -f docker-compose.yml pull dev
-          
-          source_file="docker-compose.yml"
-
-          # Define the target folder name
-          target_folder="compose-folder"
-
-          # Create the target folder if it doesn't exist
-          mkdir -p "$target_folder"
-
-          # Copy the source file to the target folder
-          cp "$source_file" "$target_folder/"
-
-          # Print a success message
-          echo "Copied $source_file to $target_folder/"
+          mkdir compose-folder
+          cat docker-compose.yml >> compose-folder/docker-compose.yml
           
       - name: Post to a Slack channel
         id: slackbuild
