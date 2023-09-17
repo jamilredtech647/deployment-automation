@@ -52,14 +52,25 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           
+
       - name: Create a file
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
-          script: echo hello world > hello.txt
-          
+          script:  | 
+            echo hello world > hello.txt
+            
+      - name: SCP Command to Transfer Files
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.HOST_USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          source: "docker-compose.yml"
+          target: demo-deployment
+      
       - name: Post to a Slack channel
         id: slackdeployment
         uses: slackapi/slack-github-action@v1.24.0
