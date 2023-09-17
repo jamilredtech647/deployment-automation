@@ -39,6 +39,21 @@ jobs:
       - name: Run a Bash command
         run: |
           docker-compose -f docker-compose.yml pull dev
+          
+          source_file="docker-compose.yml"
+
+          # Define the target folder name
+          target_folder="compose-folder"
+
+          # Create the target folder if it doesn't exist
+          mkdir -p "$target_folder"
+
+          # Copy the source file to the target folder
+          cp "$source_file" "$target_folder/"
+
+          # Print a success message
+          echo "Copied $source_file to $target_folder/"
+          
       - name: Post to a Slack channel
         id: slackbuild
         uses: slackapi/slack-github-action@v1.24.0
@@ -51,9 +66,6 @@ jobs:
           slack-message: "GitHub action build and push to Dockerhub result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-          
-
-      
             
       - name: SCP Command to Transfer Files
         uses: appleboy/scp-action@v0.1.4
@@ -61,7 +73,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
-          source: "docker-compose.yml"
+          source: "compose-folder/docker-compose.yml"
           target: demo-deployment
           
       - name: Deployment Command
